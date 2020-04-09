@@ -117,3 +117,69 @@ this.textRef = React.createRef();
 
 console.log(this.textRef.current.value);
 ```
+
+## 组件
+
+组件传递，接收参数
+
+```javascript
+// 函数组件 通过参数
+hello (props) => {
+  console.log(props);
+}
+// 类组件 通过this.props
+class hello extends React.Component {
+  render() {
+    return (
+      <div>{this.props}</div>
+    )
+  }
+}
+```
+组件数据传递：
+
+父->子：
+通过子组件的属性传递，子组件通过props接收
+
+子->父：
+通过子组件属性传递一个函数给子组件，子组件在props中调用这个函数，将数据作为参数传递给父组件
+
+兄弟<->兄弟：
+就在共同的一个父组件中实现 子->父 和 父->子的操作
+
+多级组件传递数据：
+
+使用context
+```javascript
+const {Provider, Consumer} = React.creatContext()  
+
+<Provider value={data}>
+  <div></div>
+</Provider>
+
+<Consumer>
+  {
+    data => <div>{data}</div>
+  }
+</Consumer>
+```
+
+props.children属性，是组件的子节点
+
+props校验 prop-types包
+
+```javascript
+hello.PropTypes = {
+  colors: PropTypes.array,
+  fn: PropTypes.fn.isRequired,
+  obj: PropTypes.shape({
+    red: PropTypes.string
+  })
+}
+```
+props默认值
+```javascript
+hello.defaultProps = {
+  color: 'red'
+}
+```
