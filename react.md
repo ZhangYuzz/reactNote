@@ -183,3 +183,62 @@ hello.defaultProps = {
   color: 'red'
 }
 ```
+
+# 组件的生命周期
+
+## 1. 挂载阶段
+
+- constructor：
+  处理this指向，初始化state
+- render：
+  每次组件渲染，渲染ui
+- componentDidMount：
+  发送网络请求，DOM操作
+
+## 2. 更新阶段
+this.forceUpdate();
+setState
+更新props
+- render：
+  每次组件渲染，渲染ui
+- componentDidUpdate：
+  发送网络请求，DOM操作
+  如果要setDate必须要放在if条件中，因为直接调用会导致递归更新。  
+
+  componentDidUpdate(pre)  
+  pre是上次的props，this.props是当前props
+
+## 3. 卸载阶段
+
+- componentWillUnmount  
+清除定时器，清除监听函数
+
+
+# render props 和 高阶组件
+
+#### 复用组件
+```javascript
+// 父组件中
+<Mouse>
+  {
+    params => {
+      return (
+        <p>params.xxx</p>
+      )
+    }
+  }
+</Mouse>
+
+// 子组件中
+render() {
+  return this.props.children(state)
+}
+```
+#### 高阶组件
+其实就是在函数中创建一个类组件，在这个类组件中做一些数据处理然后把这些数据状态传递到其他组件中
+
+要设置displayName  
+
+类组件名称.displayName = `xxxx${xxxx}`
+
+要传递props，不然会在类组件中丢失掉
