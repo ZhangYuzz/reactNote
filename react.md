@@ -242,3 +242,33 @@ render() {
 类组件名称.displayName = `xxxx${xxxx}`
 
 要传递props，不然会在类组件中丢失掉
+
+
+# react原理
+
+### setState是异步的
+
+推荐写法
+```javascript
+// params state props 是最新状态的
+this.setstate((state, props) => {
+  return {
+    count: state.count + 1
+  }
+})
+```
+setstate的第二个参数是完成更新的回调函数
+
+### jsx的转化过程
+
+jsx是createElement的语法糖
+通过babel/preset-react编译成createElement的方法 
+createElement会转换成js对象
+
+### 组件更新机制
+
+组件更新时，只会更新他自己和他的后代组件
+
+### 组件性能优化
+1. state只存储组件渲染相关的值，不做渲染的数据不应该放在state中，直接放在this中
+2. 避免不需要的重新渲染使用钩子函数（shouldComponentUpdate(nextProps, nextState)）根据函数return值来判断，函数中的参数都是即将更新后的状态，通过this.state可以拿到更新前的状态
