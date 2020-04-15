@@ -272,3 +272,42 @@ createElement会转换成js对象
 ### 组件性能优化
 1. state只存储组件渲染相关的值，不做渲染的数据不应该放在state中，直接放在this中
 2. 避免不需要的重新渲染使用钩子函数（shouldComponentUpdate(nextProps, nextState)）根据函数return值来判断，函数中的参数都是即将更新后的状态，通过this.state可以拿到更新前的状态
+
+### 纯组件
+通过对比了props和state的值，来决定是否渲染
+class hello extend React.PureComponent {}
+
+实际是shallow compare
+
+如果是引用类型shallow compare不能直接修改原始对象
+const newObj = this.state.obj  (no)
+const newObj = {...this.state.obj, name: xxx} (yes)
+
+### 虚拟DOM和Diff算法
+
+虚拟DOM是一个js对象
+
+# react路由
+class First extends React.Component {}
+<Link to="/first"></Link>
+<Route path="/first" component="First"></Route>
+
+1. link组件修改url地址
+2. React路由监听url变化
+3. React路由遍历内部组件匹配pathName
+4. 匹配成功显示该组件
+
+### 编程式导航
+通过props.history.push()
+通过props.history.go()
+
+### 默认路由
+
+<Route path="/" component="First"></Route>
+
+匹配模式
+path="/"
+已"/"开头的路由都会匹配成功
+
+精确匹配
+在route组件上增加exact属性
