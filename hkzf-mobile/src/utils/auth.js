@@ -12,9 +12,4 @@ const removeToken = () => localStorage.removeItem(TOKEN_NAME)
 // 是否登录（有权限）
 const isAuth = () => !!getToken()
 
-export {
-  getToken,
-  setToken,
-  removeToken,
-  isAuth
-}
+export { getToken, setToken, removeToken, isAuth }

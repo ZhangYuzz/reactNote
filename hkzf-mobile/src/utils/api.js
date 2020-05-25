@@ -1,12 +1,7 @@
 import axios from 'axios'
-import {
-  BASE_URL
-} from './url'
+import { BASE_URL } from './url'
 
-import {
-  getToken,
-  removeToken
-} from './auth'
+import { getToken, removeToken } from './auth'
 
 // 创建axios示例
 const API = axios.create({
@@ -26,9 +21,7 @@ const API = axios.create({
 // 添加请求拦截器
 API.interceptors.request.use(config => {
   // console.log(config, config.url)
-  const {
-    url
-  } = config
+  const { url } = config
   if (
     url.startsWith('/user') &&
     !url.startsWith('/user/login') &&
@@ -43,9 +36,7 @@ API.interceptors.request.use(config => {
 // 添加响应拦截器
 API.interceptors.response.use(response => {
   // console.log(response)
-  const {
-    status
-  } = response.data
+  const { status } = response.data
   if (status === 400) {
     // 此时，说明 token 失效，直接移除 token 即可
     removeToken()
@@ -53,6 +44,4 @@ API.interceptors.response.use(response => {
   return response
 })
 
-export {
-  API
-}
+export { API }
