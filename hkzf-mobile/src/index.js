@@ -16,4 +16,4 @@ import './index.css'
 // 注意：应该将 组件 的导入放在样式导入后面，从而避免样式覆盖的问题
 import App from './App'
 
-ReactDOM.render( < App / > , document.getElementById('root'))
+ReactDOM.render(<App />, document.getElementById('root'))
